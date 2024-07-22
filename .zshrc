@@ -46,3 +46,4 @@ eval "$(fzf --zsh)"
 # Powerlevel10k Configuration
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
