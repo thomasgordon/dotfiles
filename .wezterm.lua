@@ -5,12 +5,44 @@ local wezterm = require("wezterm")
 local config = {}
 
 -- Appearance
-config.color_scheme = "Apprentice (Gogh)" -- Use the Apprentice color scheme
+config.color_scheme = "Custom"                        -- Use the custom color scheme
 config.font = wezterm.font("MesloLGS Nerd Font Mono") -- Set the font to MesloLGS Nerd Font Mono
-config.font_size = 16.0
+config.font_size = 16.0                               -- Adjusted to fit more lines on the screen
 config.line_height = 1.2
-config.window_background_opacity = 0.95
+config.window_background_opacity = 0.9
 config.text_background_opacity = 1.0
+
+-- Define the custom color scheme
+config.colors = {
+	foreground = "#c6c6c6",
+	background = "#303030",
+	cursor_bg = "#c6c6c6",
+	cursor_border = "#c6c6c6",
+	cursor_fg = "#303030",
+	selection_bg = "#5e5e5e",
+	selection_fg = "#c6c6c6",
+
+	ansi = {
+		"#303030", -- black
+		"#c10023", -- red
+		"#a83334", -- green
+		"#b51d2c", -- yellow
+		"#8c4b46", -- blue
+		"#7d534f", -- magenta
+		"#9a413d", -- cyan
+		"#c6c6c6", -- white
+	},
+	brights = {
+		"#5e5e5e", -- bright black
+		"#ff8781", -- bright red
+		"#ffa095", -- bright green
+		"#ff948b", -- bright yellow
+		"#feb2aa", -- bright blue
+		"#ebbbb5", -- bright magenta
+		"#ffaaa0", -- bright cyan
+		"#ffffff", -- bright white
+	},
+}
 
 -- Tab Bar
 config.enable_tab_bar = true
@@ -28,11 +60,11 @@ config.scrollback_lines = 5000
 
 -- Key bindings
 config.keys = {
-	{ key = "c", mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "Clipboard" }) },
-	{ key = "v", mods = "CTRL|SHIFT", action = wezterm.action({ PasteFrom = "Clipboard" }) },
-	{ key = "t", mods = "CTRL|SHIFT", action = wezterm.action({ SpawnTab = "DefaultDomain" }) },
-	{ key = "w", mods = "CTRL|SHIFT", action = wezterm.action({ CloseCurrentTab = { confirm = true } }) },
-	{ key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTabRelative = -1 }) },
+	{ key = "c",          mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "Clipboard" }) },
+	{ key = "v",          mods = "CTRL|SHIFT", action = wezterm.action({ PasteFrom = "Clipboard" }) },
+	{ key = "t",          mods = "CTRL|SHIFT", action = wezterm.action({ SpawnTab = "DefaultDomain" }) },
+	{ key = "w",          mods = "CTRL|SHIFT", action = wezterm.action({ CloseCurrentTab = { confirm = true } }) },
+	{ key = "LeftArrow",  mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTabRelative = -1 }) },
 	{ key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action({ ActivateTabRelative = 1 }) },
 	{
 		key = "=",
@@ -44,11 +76,11 @@ config.keys = {
 		mods = "CTRL",
 		action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
 	},
-	{ key = "LeftArrow", mods = "CTRL", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
+	{ key = "LeftArrow",  mods = "CTRL", action = wezterm.action({ ActivatePaneDirection = "Left" }) },
 	{ key = "RightArrow", mods = "CTRL", action = wezterm.action({ ActivatePaneDirection = "Right" }) },
-	{ key = "UpArrow", mods = "CTRL", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
-	{ key = "DownArrow", mods = "CTRL", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
-	{ key = "x", mods = "CTRL", action = wezterm.action({ CloseCurrentPane = { confirm = true } }) },
+	{ key = "UpArrow",    mods = "CTRL", action = wezterm.action({ ActivatePaneDirection = "Up" }) },
+	{ key = "DownArrow",  mods = "CTRL", action = wezterm.action({ ActivatePaneDirection = "Down" }) },
+	{ key = "x",          mods = "CTRL", action = wezterm.action({ CloseCurrentPane = { confirm = true } }) },
 }
 
 -- Mouse bindings
