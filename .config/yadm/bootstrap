@@ -44,9 +44,7 @@ elif [ "$OS" = "Linux" ]; then
         neofetch \
         curl \
         git \
-        unzip \
-        realpath \
-        dirname
+        unzip
 
     # eza
     if ! command -v eza &>/dev/null; then
