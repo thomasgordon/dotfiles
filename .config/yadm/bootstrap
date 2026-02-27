@@ -1,0 +1,103 @@
+#!/bin/bash
+
+set -e
+
+OS="$(uname -s)"
+
+if [ "$OS" = "Darwin" ]; then
+    # Install Homebrew if not present
+    if ! command -v brew &>/dev/null; then
+        echo "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        # Add brew to PATH for the rest of the script
+        eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
+    fi
+
+    echo "Installing packages via Homebrew..."
+    brew install \
+        eza \
+        fzf \
+        neovim \
+        zsh \
+        jq \
+        neofetch \
+        oh-my-posh \
+        zoxide \
+        jq \
+        antidote
+
+    brew install --cask font-hack-nerd-font
+
+    brew tap FelixKratz/formulae
+    brew install sketchybar
+    brew install --cask aerospace
+
+elif [ "$OS" = "Linux" ]; then
+    echo "Updating package lists..."
+    sudo apt-get update
+
+    echo "Installing apt packages..."
+    sudo apt-get install -y \
+        zsh \
+        fzf \
+        jq \
+        neofetch \
+        curl \
+        git \
+        unzip \
+        realpath \
+        dirname
+
+    # eza
+    if ! command -v eza &>/dev/null; then
+        echo "Installing eza..."
+        sudo mkdir -p /etc/apt/keyrings
+        wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc \
+            | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+        echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" \
+            | sudo tee /etc/apt/sources.list.d/gierens.list
+        sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+        sudo apt-get update
+        sudo apt-get install -y eza
+    fi
+
+    # neovim
+    if ! command -v nvim &>/dev/null; then
+        echo "Installing neovim..."
+        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+        chmod +x nvim-linux-x86_64.appimage
+        mkdir -p /opt/nvim
+        mv nvim-linux-x86_64.appimage /opt/nvim/nvim
+        export PATH="$PATH:/opt/nvim/"
+    fi
+
+    # antidote
+    if [ ! -d "${ZDOTDIR:-$HOME}/.antidote" ]; then
+        echo "Installing antidote..."
+        git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR:-$HOME}/.antidote"
+    fi
+
+    # oh-my-posh
+    if ! command -v oh-my-posh &>/dev/null; then
+        echo "Installing oh-my-posh..."
+        curl -s https://ohmyposh.dev/install.sh | bash -s
+    fi
+
+    # zoxide
+    if ! command -v zoxide &>/dev/null; then
+        echo "Installing zoxide..."
+        curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+    fi
+
+else
+    echo "Unsupported OS: $OS"
+    exit 1
+fi
+
+# Set zsh as default shell (both platforms)
+if [ "$SHELL" != "$(which zsh)" ]; then
+    echo "Setting zsh as default shell..."
+    chsh -s "$(which zsh)"
+fi
+
+echo "Bootstrap complete! You may need to restart your shell or log out and back in."
