@@ -1,0 +1,14 @@
+background = 20201d
+foreground = F7F6F2
+
+palette = 0=#20201D
+palette = 1=#F3535E
+palette = 2=#3EF47B
+palette = 3=#F7F6F2
+palette = 4=#A8D0DC
+palette = 5=#FFC2C6
+palette = 6=#F7F6F2
+palette = 7=#F7F6F2
+
+font-family = CaskaydiaCove NFM
+font-size = 16
