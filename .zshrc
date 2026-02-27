@@ -1,4 +1,10 @@
-source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+# Antidote
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+else
+    source ~/.antidote/antidote.zsh
+fi
+
 antidote load ~/.config/antidote/.zsh_plugins.txt
 
 source ~/.config/zsh/aliases.zsh

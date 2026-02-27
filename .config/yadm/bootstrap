@@ -98,4 +98,6 @@ if [ "$SHELL" != "$(which zsh)" ]; then
     chsh -s "$(which zsh)"
 fi
 
+export PATH="$PATH:$HOME/.local/bin"
+
 echo "Bootstrap complete! You may need to restart your shell or log out and back in."
