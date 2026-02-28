@@ -99,5 +99,6 @@ if [ "$SHELL" != "$(which zsh)" ]; then
 fi
 
 export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:root/.local/bin"
 
 echo "Bootstrap complete! You may need to restart your shell or log out and back in."

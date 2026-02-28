@@ -3,6 +3,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 else
     source ~/.antidote/antidote.zsh
+    export PATH="$PATH:$HOME/.local/bin"
+    export TERM=xterm-256color
 fi
 
 antidote load ~/.config/antidote/.zsh_plugins.txt
