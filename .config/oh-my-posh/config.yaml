@@ -44,19 +44,11 @@ blocks:
       - type: git
         style: plain
         foreground: p:white
-        template: "[{{.RepoName}}] "
+        template: "[{{.HEAD}}] "
       - type: project
         style: plain
         foreground: p:white
-        template: "[{{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}{{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }}] "
-      - type: python
-        style: plain
-        foreground: p:white
-        template: "[ {{ .Full }}] "
-      - type: node
-        style: plain
-        foreground: p:white
-        template: "[ {{ .Full }}] "
+        template: "[{{ if .Error }}{{ .Error }}{{ else }}{{ if .Name }}{{.Name}}{{ end }} {{ if .Version }}{{ .Version }}{{ end }}{{ end }}] "
 
   # Right hand side
   - type: prompt
